@@ -4,13 +4,13 @@ import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-jsonData = open('response.json', 'r')
+jsonData = open('places.json', 'r')
 data = json.load(jsonData)
 jsonData.close()
 
 places = pd.DataFrame(columns=['id','name_fi', 'tags'])
 count = 0
-print(data['meta'])
+print('Amount of places from response metadata: ', data['meta'])
 for place in data['data']:
     itemId = place['id']
     nameFi = place['name']['fi']
@@ -19,7 +19,7 @@ for place in data['data']:
         tags += "'"+tag['name']+"'"
     places = places.append(dict(zip(places.columns,[itemId, nameFi, tags])), ignore_index=True)
     count += 1
-print(count)
+print('Amount of places in dataframe: ', count)
 
 cv = CountVectorizer() 
 count_matrix = cv.fit_transform(places['tags'])
