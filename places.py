@@ -47,5 +47,5 @@ print('Top 5 similar places to '+place_name+' are:\n')
 for element in sorted_similar_places:
     print(get_name_fi_from_index(element[0]))
     i=i+1
-    if i>5:
+    if i>4:
         break

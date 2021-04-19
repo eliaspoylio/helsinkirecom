@@ -1,0 +1,19 @@
+<html>
+
+<head>
+    {% if title %}
+    <title>{{ title }} - Recommendation System</title>
+    {% else %}
+    <title>Recommendation System</title>
+    {% endif %}
+</head>
+
+<body>
+    {% for place in places %}
+    <div>
+        <p>{{ place }}</p>
+    </div>
+    {% endfor %}
+</body>
+
+</html>
