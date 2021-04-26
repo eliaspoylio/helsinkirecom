@@ -9,9 +9,11 @@
 </head>
 
 <body>
-    {% for place in places %}
+    <h3>A place user likes: {{ place_user_likes }}</h3>
+    <h3>Recommendations:</h3>
+    {% for recommendation in recommendations %}
     <div>
-        <p>{{ place }}</p>
+        <p>{{ recommendation }}</p>
     </div>
     {% endfor %}
 </body>
