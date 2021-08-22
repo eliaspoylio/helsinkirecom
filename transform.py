@@ -4,7 +4,7 @@ import json
 
 def remove_duplicates(data, title):
     df = pd.DataFrame(columns=['id', 'name_fi', 'tags'])
-    print('Amount of ', title ,' from response metadata: ', data['meta'])
+    print('Amount of', title ,'from response metadata: ', data['meta'])
     for item in data['data']:
         itemId = item['id']
         nameFi = item['name']['fi']
@@ -13,11 +13,14 @@ def remove_duplicates(data, title):
             tags += "'"+tag['name']+"'"
         df = df.append(
             dict(zip(df.columns, [itemId, nameFi, tags])), ignore_index=True)
-    print('Length: ', len(df))
+    print(title, 'Length: ', len(df))
 
-    df_dup_removed = df.drop_duplicates(
-        subset=['name_fi'], keep='first')
-    print('Length: ', len(df_dup_removed))
+    df_duplicates_removed = df.drop_duplicates(
+        subset=['name_fi'], keep='first', ignore_index=True)
+    print(title, 'Length: ', len(df_duplicates_removed))
+
+    df_duplicates_removed.to_pickle(title+'.bin')
+
 
 
 """
