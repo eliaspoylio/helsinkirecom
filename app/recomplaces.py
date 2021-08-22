@@ -5,9 +5,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import random
 
-
-
-def recom():
+def recom(place_user_likes):
 
     jsonData = open('places.json', 'r')
     data = json.load(jsonData)
@@ -38,7 +36,7 @@ def recom():
     def get_tags_from_index(index):
         return places.iloc[[index]].tags.values[0]
 
-    place_user_likes = '3108'
+    #place_user_likes = '3108'
     place_index = get_index_from_id(place_user_likes)
     place_name = get_name_fi_from_index(place_index)
     #print(place_index)
@@ -66,3 +64,23 @@ def recom():
     #print(recommendations_dict)
 
     return recommendations_dict
+
+def sample(nr):
+    
+    jsonData = open('places.json', 'r')
+    data = json.load(jsonData)
+    jsonData.close()
+
+    places = pd.DataFrame(columns=['id', 'name_fi', 'tags'])
+
+    for place in data['data']:
+        itemId = place['id']
+        nameFi = place['name']['fi']
+        if (len(place['tags']) > 2):
+            tags = ''
+            for tag in place['tags']:
+                tags += "'"+tag['name']+"'"
+            places = places.append(
+            dict(zip(places.columns, [itemId, nameFi, tags])), ignore_index=True)
+    sample = places.sample(n=int(nr))
+    return sample.to_dict('index')
