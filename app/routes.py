@@ -6,9 +6,8 @@ from app.recom import recom, sample
 @app.route('/')
 @app.route('/index')
 def index():
-    places = recom("3108")
-    print(places['place_user_likes'])
-    return render_template('index.html', place_user_likes=places['place_user_likes'], recommendations=places['recommendations'])
+    places = recom("3108", "places")
+    return render_template('index.html', place_user_likes=places['item_user_likes'], recommendations=places['recommendations'])
 
 @app.route('/recom/places/<place_user_likes>', methods = ['GET'])
 def place_recommendations(place_user_likes):
