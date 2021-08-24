@@ -1,7 +1,7 @@
 from flask import render_template
 from app import app
 
-from app.recomplaces import recom, sample
+from app.recom import recom, sample
 
 @app.route('/')
 @app.route('/index')
@@ -10,11 +10,15 @@ def index():
     print(places['place_user_likes'])
     return render_template('index.html', place_user_likes=places['place_user_likes'], recommendations=places['recommendations'])
 
-@app.route('/recom/<place_user_likes>', methods = ['POST', 'GET'])
-def recommendations(place_user_likes):
-    places = recom(place_user_likes)
+@app.route('/recom/places/<place_user_likes>', methods = ['GET'])
+def place_recommendations(place_user_likes):
+    places = recom(place_user_likes, "places")
     return places
 
+@app.route('/recom/events/<event_user_likes>', methods = ['GET'])
+def event_recommendations(event_user_likes):
+    events = recom(event_user_likes, "events")
+    return events
 
 @app.route('/sample/<number>', methods = ['GET'])
 def samples(number):
