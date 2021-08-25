@@ -8,20 +8,33 @@ from app.recom import recom, sample, available
 @app.route('/index')
 def index():
     places_available = available("places")
-    places = recom("3108", "places")
     return render_template('index.html',
                            places_available=places_available,
-                           place_user_likes=places['item_user_likes'],
-                           recommendations=places['recommendations'])
+                           )
+
 
 @app.route("/search/<string:box>")
 def process(box):
     query = request.args.get('query')
     places_available = available("places")
     if box == 'places':
-        filtered = [place for place in places_available if place['value'].startswith(query)]
+        filtered = [
+            place for place in places_available if place['value'].startswith(query)]
         suggestions = filtered
-    return jsonify({"suggestions":suggestions})
+    return jsonify({"suggestions": suggestions})
+
+
+@app.route('/response', methods=['POST'])
+def response():
+    place = request.form.get("place")
+    print(place)
+    places_available = available("places")
+    place_id = next(item['data'] for item in places_available if item['value'] == place)
+    print(place_id)
+    places = recom(place_id, "places")
+    return render_template("index.html",
+                           place_user_likes=places['item_user_likes'],
+                           recommendations=places['recommendations'])
 
 
 @app.route('/recom/places/<place_user_likes>', methods=['GET'])

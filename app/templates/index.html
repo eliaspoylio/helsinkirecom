@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
-  
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
+
 
 </head>
 
@@ -49,8 +50,11 @@
 
         <div class="block">
 
-            Names:
-            <input type="text" name="places" id="autocomplete1" />
+            <form method="POST" action="/response">
+                Place: <input type="text" name="place" id="autocomplete1" required><br>
+                <input type="submit" value="Submit">
+            </form>
+
 
 
             <script>
