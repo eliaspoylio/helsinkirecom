@@ -43,6 +43,17 @@ def recom(item_user_likes, category):
 
     return recommendations_dict
 
+def available(category):
+
+    items = pd.read_pickle("%s.bin" % category)
+
+    del items['tags']
+    items = items.rename(columns={"name_fi":"value"})
+    items = items.rename(columns={"id":"data"})
+    items[['value', 'data']]
+    return items.to_dict('records')
+
+
 def sample(nr):
     
     jsonData = open('places.json', 'r')

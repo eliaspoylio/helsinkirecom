@@ -6,18 +6,80 @@
     {% else %}
     <title>Recommendation System</title>
     {% endif %}
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
+  
+
 </head>
 
 <body>
-    {% if place_user_likes %}
-    <h3>A place user likes: {{ place_user_likes }}</h3>
-    <h3>Recommendations:</h3>
-    {% for recommendation in recommendations %}
-    <div>
-        <p>{{ recommendation }}</p>
+    <div class="container_blue">
+
+        <div class="block">
+            {% if place_user_likes %}
+            <h3>A place user likes: {{ place_user_likes }}</h3>
+            <h3>Recommendations:</h3>
+            {% for recommendation in recommendations %}
+            <div>
+                <p>{{ recommendation }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="info">
+            {% if place_user_likes %}
+            <h3>A place user likes: {{ place_user_likes }}</h3>
+            <h3>Recommendations:</h3>
+            {% for recommendation in recommendations %}
+            <div>
+                <p>{{ recommendation }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
     </div>
-    {% endfor %}
-    {% endif %}
+
+    <div class="container">
+
+        <div class="block">
+
+            Names:
+            <input type="text" name="places" id="autocomplete1" />
+
+
+            <script>
+                $('#autocomplete1').autocomplete({
+                    serviceUrl: '/search/places',
+                    dataType: 'json',
+                    onSearchComplete: function (query, suggestions) {
+                        console.log(query);
+                    }
+                });
+            </script>
+
+        </div>
+
+        <div class="info">
+            {% if place_user_likes %}
+            <h3>A place user likes: {{ place_user_likes }}</h3>
+            <h3>Recommendations:</h3>
+            {% for recommendation in recommendations %}
+            <div>
+                <p>{{ recommendation }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+
+
 </body>
 
 </html>
