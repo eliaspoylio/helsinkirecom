@@ -18,30 +18,11 @@
 </head>
 
 <body>
-    <div class="container_blue">
+    <div class="container">
 
-        <div class="block">
-            {% if place_user_likes %}
-            <h3>A place user likes: {{ place_user_likes }}</h3>
-            <h3>Recommendations:</h3>
-            {% for recommendation in recommendations %}
-            <div>
-                <p>{{ recommendation }}</p>
-            </div>
-            {% endfor %}
-            {% endif %}
-        </div>
-
-        <div class="info">
-            {% if place_user_likes %}
-            <h3>A place user likes: {{ place_user_likes }}</h3>
-            <h3>Recommendations:</h3>
-            {% for recommendation in recommendations %}
-            <div>
-                <p>{{ recommendation }}</p>
-            </div>
-            {% endfor %}
-            {% endif %}
+        <div class="wide_info">
+            <h3>A place user likes</h3>
+            <p>recommendation </p>
         </div>
 
     </div>
@@ -51,7 +32,7 @@
         <div class="block">
 
             <form method="POST" action="/response">
-                Place: <input type="text" name="place" id="autocomplete1" required><br>
+                Place: <input type="text" name="place" id="autocomplete1" required>
                 <input type="submit" value="Submit">
             </form>
 
@@ -76,6 +57,14 @@
             {% for recommendation in recommendations %}
             <div>
                 <p>{{ recommendation }}</p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h3>. </h3>
+            <h3>. </h3>
+            {% for i in range(5) %}
+            <div>
+                <p>. </p>
             </div>
             {% endfor %}
             {% endif %}

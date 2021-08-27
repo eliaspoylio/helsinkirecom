@@ -25,13 +25,33 @@ body {
     width: 40%;
 }
 
+.wide_info {
+    background-color: #0A1931;
+    padding: 2%;
+    width: 90%;
+    outline-style: dotted;
+    outline-color: #185ADB;
+}
+
 .info {
     background-color: #FFC947;
     color: #0A1931;
     padding: 2%;
     width: 40%;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
+input[type=submit] {
+    padding: 5px 15px;
+    background: #185ADB;
+    color: #EFEFEF;
+    font-family: "Lucida Console", "Courier New", monospace;
+    border: 0 none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+  }
 
 
 
