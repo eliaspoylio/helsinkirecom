@@ -13,3 +13,7 @@ http://open-api.myhelsinki.fi/
 |-|-|-|
 |/recom/places/{id}|GET|Returns name of the place with given id and array of recommencations|
 |/recom/events/{id}|GET|Returns name of the event with given id and array of recommencations|
+
+## Data cleaning
+
+Repo contains `etl.py` script that is used for extracting, transforming and loading data. It fetches all events and places from the API and removes duplicates with matching names. Resulting dataframes are saved in serialized form for faster handling.
