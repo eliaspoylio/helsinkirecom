@@ -6,18 +6,74 @@
     {% else %}
     <title>Recommendation System</title>
     {% endif %}
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
+
+
 </head>
 
 <body>
-    {% if place_user_likes %}
-    <h3>A place user likes: {{ place_user_likes }}</h3>
-    <h3>Recommendations:</h3>
-    {% for recommendation in recommendations %}
-    <div>
-        <p>{{ recommendation }}</p>
+    <div class="container">
+
+        <div class="wide_info">
+            <h3>Recommendation system for places and events in Helsinki</h3>
+            <p>Recommendations are based on tags in <a href="http://open-api.myhelsinki.fi/">MyHelsinki API</a></p>
+            <p>Documentation for API endpoints at <a href="https://github.com/eliaspoylio/helsinkirecom">https://github.com/eliaspoylio/helsinkirecom</a></p>
+        </div>
+
     </div>
-    {% endfor %}
-    {% endif %}
+
+    <div class="container">
+
+        <div class="block">
+
+            <form method="POST" action="/response">
+                Place: <input type="text" name="place" id="autocomplete1" required>
+                <input type="submit" value="Submit">
+            </form>
+
+
+
+            <script>
+                $('#autocomplete1').autocomplete({
+                    serviceUrl: '/search/places',
+                    dataType: 'json',
+                    onSearchComplete: function (query, suggestions) {
+                        console.log(query);
+                    }
+                });
+            </script>
+
+        </div>
+
+        <div class="info">
+            {% if place_user_likes %}
+            <h3>A place user likes: {{ place_user_likes }}</h3>
+            <h3>Recommendations:</h3>
+            {% for recommendation in recommendations %}
+            <div>
+                <p>{{ recommendation }}</p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h3>. </h3>
+            <h3>. </h3>
+            {% for i in range(5) %}
+            <div>
+                <p>. </p>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+
+
 </body>
 
 </html>
